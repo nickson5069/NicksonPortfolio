@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Studio</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/substyle.css">
+
+    <style>
+        /* Additional styling for About Me page */
+        .about-img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .about-img:hover {
+            transform: scale(1.02);
+        }
+        .about-p {
+            margin-top: 0px !important;
+        }
+        
+        .edu-section-bg {
+            background: linear-gradient(180deg, #f9f9f9 0%, #ffffff 100%);
+            padding: 5% 0;
+            margin: 10% 0;
+        }
+        
+        .edu-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .edu-col {
+            flex: 1 1 300px;
+        }
+        
+        .edu-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FF8C42;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .edu-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #FF8C42;
+            border-radius: 2px;
+        }
+        
+        .edu-box {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .edu-content {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-left: 3px solid #FF8C42;
+        }
+        
+        .edu-content:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.1);
+        }
+        
+        .year {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #FF8C42;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        
+        .edu-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .edu-content p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+        
+        .page-title {
+            margin: 60px 0 40px;
+        }
+        
+        .page-title h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FF8C42;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .page-title h1:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: #FF8C42;
+            border-radius: 2px;
+        }
+        
+        .spacing {
+            height: 40px;
+        }
+        
+        /* Skills Level Section */
+        .skill-badge {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .skill-badge:hover {
+            background-color: #FF8C42;
+            color: white;
+        }
+        
+        .SkillBar {
+            margin-bottom: 20px;
+            background-color: #f0f0f0;
+            border-radius: 30px;
+            overflow: hidden;
+            height: 30px;
+            position: relative;
+        }
+        
+        .SkillBar > div {
+            background: linear-gradient(90deg, #FF8C42, #FFAA6C);
+            height: 100%;
+            border-radius: 30px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+            animation: skillFill 1.5s ease-out;
+        }
+        
+        @keyframes skillFill {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        .Skill-Area {
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .PercentText {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+        
+        #Skill-HTML { width: 100%; }
+        #Skill-CSS { width: 70%; }
+        #Skill-jQuery { width: 40%; }
+        #Skill-JS { width: 60%; }
+        #Skill-PHP { width: 30%; }
+        #Skill-SQL { width: 80%; }
+        #Skill-Photoshop { width: 80%; }
+        #Skill-XD { width: 75%; }
+        #Skill-Illustrator { width: 60%; }
+        #Skill-Animation { width: 30%; }
+        #Skill-InDesign { width: 50%; }
+        
+        .skills-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .skills-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .toolkit-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .toolkit-tags span {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .toolkit-tags span:hover {
+            background-color: #FF8C42;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .toolkit-tags i {
+            margin-right: 6px;
+            color: #FF8C42;
+        }
+        
+        .toolkit-tags span:hover i {
+            color: white;
+        }
+        
+        /* Circle indicators */
+        .skill-level-indicator {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 50px;
+        }
+        
+        .skill-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-dot:hover {
+            transform: scale(1.2);
+        }
+        
+        .skill-dot.blue { background-color: #FF8C42; }
+        .skill-dot.purple { background-color: #FFAA6C; opacity: 0.6; }
+        
+        .text-develop, .text-design {
+            font-weight: 600;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation placeholder -->
+    <div id="navbar-container"></div>
+
+    <main>
+        <div class="container">
+            <!-- Page Title -->
+            <div class="row page-title">
+                <div class="col-12">
+                    <h1>ABOUT ME</h1>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <!-- About Content -->
+            <div class="row align-items-center">
+                <div class="col-md-7">
+                    <p class="about-p" style="font-size: 1.1rem; line-height: 1.8;">
+                        I am a student studying digital design and development. Experience working with
+                        Visual Studio, Photoshop, Adobe XD, Illustrator, Dreamweaver, PHP, Python, 
+                        HTML and CSS frameworks, including Bootstrap. I am also excited to add Flutter 
+                        to my skills stack.
+                        <br><br>
+                        Experience includes gathering technical requirements, strategy implementation, 
+                        development, content management, photo and graphic editing, maintaining an 
+                        understanding of web design principles, navigation, user experience and usability.
+                    </p>
+                    
+                    <!-- Toolkit quick view -->
+                    <div class="toolkit-tags mt-4">
+                        <span><i class="fab fa-html5"></i>HTML5</span>
+                        <span><i class="fab fa-css3-alt"></i>CSS3</span>
+                        <span><i class="fab fa-bootstrap"></i>Bootstrap</span>
+                        <span><i class="fab fa-js"></i>JavaScript</span>
+                        <span><i class="fab fa-php"></i>PHP</span>
+                        <span><i class="fab fa-python"></i>Python</span>
+                        <span><i class="fas fa-database"></i>MySQL</span>
+                        <span><i class="fas fa-pen-fancy"></i>Adobe XD</span>
+                        <span><i class="fas fa-paint-brush"></i>Illustrator</span>
+                        <span><i class="fas fa-mobile-alt"></i>Flutter</span>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                
+                <div class="col-md-4 text-center">
+                    <img src="img/bluehair.jpg" class="about-img" alt="Profile picture">
+                </div>
+            </div>
+        </div>
+
+        <!-- Education & Experience Section -->
+        <div class="edu-section-bg">
+            <div class="container">
+                <div class="edu-row">
+                    <!-- Education Column -->
+                    <div class="edu-col">
+                        <h3 class="edu-title">EDUCATION</h3>
+                        <div class="edu-box">
+                            <div class="edu-content">
+                                <div class="year">2021 - 2024</div>
+                                <h3>Republic Poly</h3>
+                                <p>Diploma in Digital Design & Development learning includes Immersive Media and
+                                    Artificial Intelligence to the Internet of Things</p>
+                            </div>
+                            
+                            <div class="edu-content">
+                                <div class="year">2020</div>
+                                <h3>Higher Nitec</h3>
+                                <p>Higher Nitec in IT Applications Development course learn to develop highly
+                                    sought-after skills and capabilities to develop and support applications for the web
+                                    and smart devices to meet business objectives.</p>
+                            </div>
+                            
+                            <div class="edu-content">
+                                <div class="year">2018 - 2019</div>
+                                <h3>Nitec</h3>
+                                <p>Nitec in Technology in Web Applications to develop interactive web content,
+                                    integration of interactive media, create professional websites using content
+                                    management system and digital assets manipulation.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Column -->
+                    <div class="edu-col">
+                        <h3 class="edu-title">EXPERIENCE</h3>
+                        <div class="edu-box">
+                            <div class="edu-content">
+                                <div class="year">2023 Apr - 2023 Dec</div>
+                                <h3>BevEat</h3>
+                                <p>Flutter application development and deployment experience, as well as knowledge about
+                                    the client's desire to modify the application.</p>
+                            </div>
+                            
+                            <div class="edu-content">
+                                <div class="year">2020 Jan - 2020 Apr</div>
+                                <h3>CPAS</h3>
+                                <p>Experienced creating web forms that can be submitted and approved by several
+                                    departments.</p>
+                            </div>
+                            
+                            <div class="edu-content">
+                                <div class="year">2019 Feb - 2019 Jun</div>
+                                <h3>Corsiva Lab</h3>
+                                <p>Maintaining client websites and creating static web pages for product promotions.
+                                    Build responsive e-commerce websites and add functionality for various product
+                                    categories.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Level Section
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="skills-header">
+                        <h2>Skills Level</h2>
+                        <div class="skill-level-indicator">
+                            <span class="text-develop">Develop</span>
+                            <span class="skill-dot blue"></span>
+                            <span class="skill-dot blue"></span>
+                            <span class="skill-dot blue"></span>
+                            <span class="skill-dot blue"></span>
+                            <span class="skill-dot blue"></span>
+                            <span class="skill-dot blue"></span>
+                            <span class="skill-dot blue"></span>
+                            <span class="skill-dot purple"></span>
+                            <span class="skill-dot purple"></span>
+                            <span class="skill-dot purple"></span>
+                            <span class="skill-dot purple"></span>
+                            <span class="text-design">Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="skills-content">
+                        <div class="SkillBar">
+                            <div id="Skill-HTML">
+                                <span class="Skill-Area">HTML</span>
+                                <span class="PercentText">100%</span>
+                            </div>
+                        </div>
+
+                        <div class="SkillBar">
+                            <div id="Skill-CSS">
+                                <span class="Skill-Area">CSS/CSS3</span>
+                                <span class="PercentText">70%</span>
+                            </div>
+                        </div>
+
+                        <div class="SkillBar">
+                            <div id="Skill-jQuery">
+                                <span class="Skill-Area">jQuery</span>
+                                <span class="PercentText">40%</span>
+                            </div>
+                        </div>
+
+                        <div class="SkillBar">
+                            <div id="Skill-JS">
+                                <span class="Skill-Area">Javascript</span>
+                                <span class="PercentText">60%</span>
+                            </div>
+                        </div>
+
+                        <div class="SkillBar">
+                            <div id="Skill-PHP">
+                                <span class="Skill-Area">PHP</span>
+                                <span class="PercentText">30%</span>
+                            </div>
+                        </div>
+
+                        <div class="SkillBar">
+                            <div id="Skill-SQL">
+                                <span class="Skill-Area">MySQL</span>
+                                <span class="PercentText">80%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="skills-content">
+                        <div class="SkillBar">
+                            <div id="Skill-Photoshop">
+                                <span class="Skill-Area">Photoshop</span>
+                                <span class="PercentText">80%</span>
+                            </div>
+                        </div>
+
+                        <div class="SkillBar">
+                            <div id="Skill-XD">
+                                <span class="Skill-Area">XD</span>
+                                <span class="PercentText">75%</span>
+                            </div>
+                        </div>
+
+                        <div class="SkillBar">
+                            <div id="Skill-Illustrator">
+                                <span class="Skill-Area">Illustrator</span>
+                                <span class="PercentText">60%</span>
+                            </div>
+                        </div>
+
+                        <div class="SkillBar">
+                            <div id="Skill-Animation">
+                                <span class="Skill-Area">Animation</span>
+                                <span class="PercentText">30%</span>
+                            </div>
+                        </div>
+
+                        <div class="SkillBar">
+                            <div id="Skill-InDesign">
+                                <span class="Skill-Area">InDesign</span>
+                                <span class="PercentText">50%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="skills-header">
+                            <h2>Skills Level</h2>
+                            <div class="skill-level-indicator">
+                                <span class="text-develop">Develop</span>
+                                <span class="skill-dot blue"></span>
+                                <span class="skill-dot blue"></span>
+                                <span class="skill-dot blue"></span>
+                                <span class="skill-dot blue"></span>
+                                <span class="skill-dot blue"></span>
+                                <span class="skill-dot blue"></span>
+                                <span class="skill-dot blue"></span>
+                                <span class="skill-dot purple"></span>
+                                <span class="skill-dot purple"></span>
+                                <span class="skill-dot purple"></span>
+                                <span class="skill-dot purple"></span>
+                                <span class="text-design">Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="skillset" style="display: flex; flex-direction: column; gap: 15px; text-align: left;">
+                            <span><i class="fas fa-graduation-cap" style="color: #FF8C42; width: 30px;"></i> Digital Design & Development student at Republic Poly</span>
+                            
+                            <span><i class="fas fa-laptop-code" style="color: #FF8C42; width: 30px;"></i> Skilled in HTML, CSS, JavaScript, Bootstrap, PHP, MySQL</span>
+                            
+                            <span><i class="fas fa-paint-brush" style="color: #FF8C42; width: 30px;"></i> Proficient with Adobe XD, Illustrator, Photoshop</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="skillset" style="display: flex; flex-direction: column; gap: 15px; text-align: left;">
+                            <span><i class="fas fa-mobile-alt" style="color: #FF8C42; width: 30px;"></i> Experience with Flutter app development at BevEat</span>
+                            
+                            <span><i class="fas fa-tools" style="color: #FF8C42; width: 30px;"></i> Past work: web form systems (CPAS), e-commerce sites (Corsiva Lab)</span>
+                            
+                            <span><i class="fas fa-star" style="color: #FF8C42; width: 30px;"></i> Passionate about UI/UX, responsive design, and clean code</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Skills Summary -->
+            <div class="row mt-5 mb-5">
+                <div class="col-12">
+                    <div class="text-center p-5" style="background: linear-gradient(180deg, #f3f3f3 0%, #e0e0e0 100%); border-radius: 16px;">
+                        <div class="mb-3">
+                            <i class="fas fa-laptop-code" style="font-size: 3rem; color: #FF8C42;"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3" style="color: #FF8C42; font-size: 1.5rem;">
+                            Digital Design & Development 
+                        </h4>
+                        <p class="text-muted" style="max-width: 700px; margin: 0 auto; font-size: 1.1rem;">
+                            Passionate about creating engaging digital experiences through both design and development. 
+                            Constantly expanding my skillset across frontend technologies, UI/UX design tools, and mobile development.
+                        </p>
+                        <div class="mt-4">
+                            <span class="tech-badge">Frontend</span>
+                            <span class="tech-badge">UI/UX Design</span>
+                            <span class="tech-badge">Mobile Dev</span>
+                            <span class="tech-badge">Database</span>
+                            <span class="tech-badge">Adobe Suite</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer placeholder -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    
+    <!-- Custom JS for loading partials -->
+    <script type="text/javascript">
+        $('#navbar-container').load('partials/header.html');
+        $('#footer-container').load('partials/footer.html');
+    </script>
+    <script src="js/navbar.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/footer.js"></script>
+</body>
+
+</html>

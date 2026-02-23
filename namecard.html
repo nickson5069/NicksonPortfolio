@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Name Card | Studio</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/substyle.css">
+
+    <style>
+        /* Additional styling for My Name Card page */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tech-badge {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-badge:hover {
+            background-color: #FF8C42;
+            color: white;
+        }
+        
+        .project-highlight {
+            background-color: #f9f9f9;
+            border-left: 4px solid #FF8C42;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .project-highlight p {
+            margin-bottom: 0;
+            font-style: italic;
+        }
+        
+        .card-preview {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .card-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .card-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .preview-caption {
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid #eee;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .preview-caption i {
+            color: #FF8C42;
+            margin-right: 8px;
+        }
+        
+        /* Key Features Cards */
+        .feature-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #f5f5f5;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 140, 66, 0.15);
+            border-color: #FF8C42;
+        }
+        
+        .feature-icon-large {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            background: linear-gradient(135deg, #FF8C42 0%, #FFAA6C 100%);
+            color: white;
+            font-size: 2rem;
+            border-radius: 20px;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 20px rgba(255, 140, 66, 0.3);
+        }
+        
+        .feature-card h4 {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .feature-tag {
+            display: inline-block;
+            background-color: #FFF0E6;
+            color: #FF8C42;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        /* Software/Tool Cards */
+        .tool-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.1);
+            border-color: #FF8C42;
+        }
+        
+        .tool-icon {
+            font-size: 2.5rem;
+            color: #FF8C42;
+            margin-bottom: 15px;
+        }
+        
+        .tool-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .tool-desc {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Color palette styling */
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .color-swatch {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-swatch.dark-green {
+            background-color: #0C3837;
+        }
+        
+        .color-swatch.gold {
+            background-color: #FF8C42;
+        }
+        
+        .color-swatch.white {
+            background-color: #ffffff;
+            border: 2px solid #eee;
+        }
+        
+        .design-element {
+            display: inline-block;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, #FF8C42, #FFAA6C);
+            margin: 0 5px;
+        }
+        
+        /* Mockup styling */
+        .card-mockup {
+            background-color: #1a3b2e;
+            border-radius: 16px;
+            padding: 40px 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-mockup::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M20,20 Q50,0 80,20 Q100,50 80,80 Q50,100 20,80 Q0,50 20,20" fill="none" stroke="%23FF8C42" stroke-width="2"/></svg>');
+            background-size: 60px 60px;
+            opacity: 0.2;
+        }
+        
+        .butterfly-icon {
+            font-size: 3rem;
+            color: #FF8C42;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation placeholder -->
+    <div id="navbar-container"></div>
+
+    <main>
+        <div class="container">
+            <!-- Project Header -->
+            <div class="row start-page-spacer">
+                <div class="col-md-5 portfolio-description">
+                    <span class="sub-title">PROJECT</span>
+                    <h1>My Name Card</h1>
+                    
+                    <span class="sub-title">CATEGORY</span>
+                    <h5>Name Card Design</h5>
+                    
+                    <span class="sub-title">SOFTWARE USED</span>
+                    <h5>Adobe Illustrator</h5>
+                    
+                    <!-- Tech stack badges -->
+                    <div class="tech-stack">
+                        <span class="tech-badge">Adobe Illustrator</span>
+                        <span class="tech-badge">Vector Design</span>
+                        <span class="tech-badge">Typography</span>
+                        <span class="tech-badge">Logo Design</span>
+                        <span class="tech-badge">Print Design</span>
+                    </div>
+                </div>
+                
+                <div class="col-md-7">
+                    <!-- Color palette showcase -->
+                    <div class="color-palette">
+                        <div class="color-swatch dark-green" title="Dark Green - Primary"></div>
+                        <div class="color-swatch gold" title="Gold - Accent"></div>
+                        <div class="color-swatch white" title="White - Text"></div>
+                    </div>
+                    
+                    <p class="about-p">
+                        The name card I create is dark-green colour and the pattern of my butterfly logo for the 
+                        background. I use solid line colour to create the divider layout of my name card. In the 
+                        front of my name card I center my logo and put my name below the divider line. In the 
+                        back of name card I put my handphone number, email, address and instagram.
+                    </p>
+                    
+                    <!-- Live Demo Button (if applicable)
+                    <div class="mt-4">
+                        <a href="#" class="live-btn" target="_blank" rel="noopener noreferrer">
+                            View Design <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#" class="live-btn" style="margin-left: 15px; background-color: transparent; color: #FF8C42; border: 2px solid #FF8C42;" target="_blank" rel="noopener noreferrer">
+                            Download Assets <i class="fas fa-download"></i>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- Portfolio Content -->
+            <div class="portfolio-img">
+                
+                <!-- Design Tools Section -->
+                <div class="row mb-5">
+                    <h3 class="section-title">Design Tools</h3>
+                    
+                    <div class="col-md-6 mb-4">
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-pen-fancy"></i>
+                            </div>
+                            <div class="tool-name">Adobe Illustrator</div>
+                            <div class="tool-desc">
+                                Professional vector graphics software used for creating the butterfly logo, layout, and typography
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="tool-name">Color Theory</div>
+                            <div class="tool-desc">
+                                Dark green primary with gold accent creates an elegant, professional appearance
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Design Elements Showcase
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card-mockup text-center">
+                            <div class="butterfly-icon">
+                                <i class="fas fa-butterfly"></i>
+                            </div>
+                            <h3 style="color: #FF8C42; font-weight: 700;">Butterfly Logo</h3>
+                            <div class="design-element"></div>
+                            <div class="design-element"></div>
+                            <div class="design-element"></div>
+                            <p style="margin-top: 15px; opacity: 0.9;">Custom vector logo repeated as background pattern</p>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <!-- Project Highlight Box
+                <div class="project-highlight">
+                    <p>
+                        <i class="fas fa-quote-left" style="color: #FF8C42; margin-right: 10px; opacity: 0.6;"></i>
+                        The divider lines create a clean, structured layout while the butterfly pattern adds subtle 
+                        texture to the dark green background. Front features centered logo and name, back displays 
+                        contact information in an organized manner.
+                        <i class="fas fa-quote-right" style="color: #FF8C42; margin-left: 10px; opacity: 0.6;"></i>
+                    </p>
+                </div> -->
+
+                <!-- Gallery Section - Larger Images -->
+                <div class="row">
+                    <h3 class="section-title">Name Card Design</h3>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="card-preview">
+                            <img class="w-100" src="img/namecard_front.jpg" alt="Name Card - Front Design" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-id-card"></i> Front - Centered butterfly logo with name below divider line
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="card-preview">
+                            <img class="w-100" src="img/namecard_back.jpg" alt="Name Card - Back Design" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-address-card"></i> Back - Contact information: phone, email, address, Instagram
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Design Specifications -->
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle" style="color: #FF8C42; margin-right: 10px;"></i> <strong>Front Design:</strong> Centered butterfly logo, name below divider</li>
+                            <li class="mb-2"><i class="fas fa-check-circle" style="color: #FF8C42; margin-right: 10px;"></i> <strong>Back Design:</strong> Phone, Email, Address, Instagram</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle" style="color: #FF8C42; margin-right: 10px;"></i> <strong>Background:</strong> Butterfly logo pattern</li>
+                            <li class="mb-2"><i class="fas fa-check-circle" style="color: #FF8C42; margin-right: 10px;"></i> <strong>Divider:</strong> Solid line in gold accent color</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Key Features Section -->
+                <div class="row mt-5">
+                    <h3 class="section-title">Key Features</h3>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-butterfly"></i>
+                            </div>
+                            <h4>Custom Butterfly Logo</h4>
+                            <p>Unique vector logo design created in Illustrator, used as a central element and repeated background pattern.</p>
+                            <span class="feature-tag">Branding</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h4>Dark Green Theme</h4>
+                            <p>Elegant dark green background with gold accent lines creates a professional and sophisticated appearance.</p>
+                            <span class="feature-tag">Color Design</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-divide"></i>
+                            </div>
+                            <h4>Solid Line Divider</h4>
+                            <p>Clean gold divider lines create visual separation and structured layout for better readability.</p>
+                            <span class="feature-tag">Layout</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-6 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-align-center"></i>
+                            </div>
+                            <h4>Centered Composition</h4>
+                            <p>Logo centered on front with name positioned below divider line for balanced visual hierarchy.</p>
+                            <span class="feature-tag">Typography</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-6 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-address-book"></i>
+                            </div>
+                            <h4>Complete Contact Info</h4>
+                            <p>Back side contains all essential contact details: phone number, email, address, and Instagram handle.</p>
+                            <span class="feature-tag">Information</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Design Summary - Light gradient matching theme -->
+                <div class="row mt-4 mb-5">
+                    <div class="col-12">
+                        <div class="text-center p-5" style="background: linear-gradient(180deg, #f3f3f3 0%, #e0e0e0 100%); border-radius: 16px;">
+                            <div class="mb-3">
+                                <i class="fas fa-id-card" style="font-size: 3rem; color: #FF8C42;"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3" style="color: #FF8C42; font-size: 1.5rem;">
+                                Professional Name Card Design
+                            </h4>
+                            <p class="text-muted" style="max-width: 700px; margin: 0 auto; font-size: 1.1rem;">
+                                Created in Adobe Illustrator featuring a custom butterfly logo, dark green color scheme with gold accents, 
+                                and clean divider lines. Front showcases branding while back provides all essential contact information.
+                            </p>
+                            <div class="mt-4">
+                                <span class="tech-badge">Vector Graphics</span>
+                                <span class="tech-badge">Brand Identity</span>
+                                <span class="tech-badge">Print Ready</span>
+                                <span class="tech-badge">Minimalist Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer placeholder -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    
+    <!-- Custom JS for loading partials -->
+    <script type="text/javascript">
+        $('#navbar-container').load('partials/header.html');
+        $('#footer-container').load('partials/footer.html');
+    </script>
+    
+    <script src="js/navbar.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/footer.js"></script>
+</body>
+
+</html>

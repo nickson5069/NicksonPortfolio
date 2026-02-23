@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chibi Alpha | Studio</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/substyle.css">
+
+    <style>
+        /* Additional styling for the character component gallery */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tech-badge {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-badge:hover {
+            background-color: #FF8C42;
+            color: white;
+        }
+        
+        .project-highlight {
+            background-color: #f9f9f9;
+            border-left: 4px solid #FF8C42;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .project-highlight p {
+            margin-bottom: 0;
+            font-style: italic;
+        }
+        
+        .component-category {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .component-category h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .component-category h4 i {
+            color: #FF8C42;
+            margin-right: 8px;
+        }
+        
+        .component-category:first-of-type {
+            margin-top: 0;
+        }
+        
+        .component-img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .component-img:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 25px rgba(255, 140, 66, 0.2);
+        }
+        
+        .letter-sample {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FF8C42;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .gallery-section {
+            margin-top: 40px;
+        }
+        
+        /* Tool Cards */
+        .tool-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.1);
+            border-color: #FF8C42;
+        }
+        
+        .tool-icon {
+            font-size: 2.5rem;
+            color: #FF8C42;
+            margin-bottom: 15px;
+        }
+        
+        .tool-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .tool-desc {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Key Features Cards */
+        .feature-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #f5f5f5;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 140, 66, 0.15);
+            border-color: #FF8C42;
+        }
+        
+        .feature-icon-large {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            background: linear-gradient(135deg, #FF8C42 0%, #FFAA6C 100%);
+            color: white;
+            font-size: 2rem;
+            border-radius: 20px;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 20px rgba(255, 140, 66, 0.3);
+        }
+        
+        .feature-card h4 {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .feature-tag {
+            display: inline-block;
+            background-color: #FFF0E6;
+            color: #FF8C42;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        /* Color palette for Chibi Alpha */
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-swatch.blue { background-color: #68CCE2; }
+        .color-swatch.green { background-color: #88C540; }
+        .color-swatch.orange { background-color: #F89B5C; }
+        .color-swatch.pink { background-color: #E23B96; }
+        .color-swatch.red { background-color: #DF4A4A; }
+        .color-swatch.yellow { background-color: #FFF202; }
+        
+        /* Stat badge */
+        .stat-badge {
+            background: linear-gradient(135deg, #FF8C42 0%, #FFAA6C 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: inline-block;
+            margin: 15px 0;
+            box-shadow: 0 10px 20px rgba(255, 140, 66, 0.3);
+        }
+        
+        .stat-badge i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation placeholder -->
+    <div id="navbar-container"></div>
+
+    <main>
+        <div class="container">
+            <!-- Project Header -->
+            <div class="row start-page-spacer">
+                <div class="col-md-5 portfolio-description">
+                    <span class="sub-title">PROJECT</span>
+                    <h1>Chibi Alpha</h1>
+                    
+                    <span class="sub-title">CATEGORY</span>
+                    <h5>Custom Cartoon Alphabet</h5>
+                    
+                    <span class="sub-title">SOFTWARE USED</span>
+                    <h5>Adobe Illustrator</h5>
+                    
+                    <!-- Tech stack badges -->
+                    <div class="tech-stack">
+                        <span class="tech-badge">Adobe Illustrator</span>
+                        <span class="tech-badge">Vector Design</span>
+                        <span class="tech-badge">Typography</span>
+                        <span class="tech-badge">Character Design</span>
+                        <span class="tech-badge">Scripting</span>
+                        <span class="tech-badge">Modular Design</span>
+                    </div>
+                </div>
+                
+                <div class="col-md-7">
+                    <!-- Color palette showcase -->
+                    <div class="color-palette">
+                        <div class="color-swatch blue" title="Blue"></div>
+                        <div class="color-swatch green" title="Green"></div>
+                        <div class="color-swatch orange" title="Orange"></div>
+                        <div class="color-swatch pink" title="Pink"></div>
+                        <div class="color-swatch red" title="Red"></div>
+                        <div class="color-swatch yellow" title="Yellow"></div>
+                    </div>
+                    
+                    <p class="about-p">
+                        Chibi Alpha is a letter I draw using my free time. This is a typographic I get inspired from my
+                        friend project and I did a recreate of the design with each body parts. After that, I research
+                        online and create a script to merge the images together and generate the 300 different combination
+                        design.
+                    </p>
+                    
+                    <!-- Stat badge for combinations -->
+                    <div class="text-center">
+                        <div class="stat-badge">
+                            <i class="fas fa-cubes"></i> 300+ Unique Combinations
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Content -->
+            <div class="portfolio-img">
+                
+                <!-- Design Tools Section -->
+                <div class="row mb-5">
+                    <h3 class="section-title">Design Tools & Process</h3>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-pen-fancy"></i>
+                            </div>
+                            <div class="tool-name">Adobe Illustrator</div>
+                            <div class="tool-desc">
+                                Vector-based design for clean, scalable character components and letterforms
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-puzzle-piece"></i>
+                            </div>
+                            <div class="tool-name">Modular Design</div>
+                            <div class="tool-desc">
+                                Each character is built from interchangeable parts: body, eyes, mouth, hair, hat
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="tool-name">Custom Script</div>
+                            <div class="tool-desc">
+                                Automated image merging script generates 300+ unique combinations from components
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Highlight Box
+                <div class="project-highlight">
+                    <p>
+                        <i class="fas fa-quote-left" style="color: #FF8C42; margin-right: 10px; opacity: 0.6;"></i>
+                        Inspired by a friend's project, I recreated the design system with interchangeable body parts, 
+                        then developed a script to automatically generate over 300 unique character combinations from 
+                        the component library.
+                        <i class="fas fa-quote-right" style="color: #FF8C42; margin-left: 10px; opacity: 0.6;"></i>
+                    </p>
+                </div> -->
+                
+                <!-- Letter A Gallery - Now with preview cards -->
+                <div class="gallery-section">
+                    <h3 class="section-title">Letter A Variations</h3>
+                    
+                    <div class="row g-4">
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <img src="img/1.png" class="component-img" alt="Letter A variation 1" loading="lazy">
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <img src="img/2.png" class="component-img" alt="Letter A variation 2" loading="lazy">
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <img src="img/3.png" class="component-img" alt="Letter A variation 3" loading="lazy">
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <img src="img/4.png" class="component-img" alt="Letter A variation 4" loading="lazy">
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <img src="img/5.png" class="component-img" alt="Letter A variation 5" loading="lazy">
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <img src="img/6.png" class="component-img" alt="Letter A variation 6" loading="lazy">
+                        </div>
+                    </div>
+                    
+                    <div class="row g-4 mt-2">
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <img src="img/7.png" class="component-img" alt="Letter A variation 7" loading="lazy">
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <img src="img/8.png" class="component-img" alt="Letter A variation 8" loading="lazy">
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <img src="img/9.png" class="component-img" alt="Letter A variation 9" loading="lazy">
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <img src="img/10.png" class="component-img" alt="Letter A variation 10" loading="lazy">
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <img src="img/11.png" class="component-img" alt="Letter A variation 11" loading="lazy">
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <img src="img/12.png" class="component-img" alt="Letter A variation 12" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Character Components - Enhanced with icons -->
+                <div class="gallery-section">
+                    <h3 class="section-title">Character Components</h3>
+                    
+                    <!-- Body Top -->
+                    <div class="component-category">
+                        <h4><i class="fas fa-tshirt"></i> Body Top</h4>
+                        <div class="row g-4">
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/body_green.png" class="component-img" alt="Green body top" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/body_orange.png" class="component-img" alt="Orange body top" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/body_pink.png" class="component-img" alt="Pink body top" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/body_red.png" class="component-img" alt="Red body top" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/body_yellow.png" class="component-img" alt="Yellow body top" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Body Bottom -->
+                    <div class="component-category">
+                        <h4><i class="fas fa-shoe-prints"></i> Body Bottom</h4>
+                        <div class="row g-4">
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/bottom_green.png" class="component-img" alt="Green body bottom" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/bottom_orange.png" class="component-img" alt="Orange body bottom" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/bottom_pink.png" class="component-img" alt="Pink body bottom" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/bottom_red.png" class="component-img" alt="Red body bottom" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/bottom_yellow.png" class="component-img" alt="Yellow body bottom" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hair -->
+                    <div class="component-category">
+                        <h4><i class="fas fa-cut"></i> Hair</h4>
+                        <div class="row g-4">
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/hair_green.png" class="component-img" alt="Green hair" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/hair_orange.png" class="component-img" alt="Orange hair" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/hair_pink.png" class="component-img" alt="Pink hair" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/hair_red.png" class="component-img" alt="Red hair" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/hair_yellow.png" class="component-img" alt="Yellow hair" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Eye -->
+                    <div class="component-category">
+                        <h4><i class="fas fa-eye"></i> Eye Expressions</h4>
+                        <div class="row g-4">
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/bored_eye.png" class="component-img" alt="Bored eye" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/enjoy_eye.png" class="component-img" alt="Enjoy eye" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/happy_eye.png" class="component-img" alt="Happy eye" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/normal_eye.png" class="component-img" alt="Normal eye" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/sleeping_eye.png" class="component-img" alt="Sleeping eye" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mouth -->
+                    <div class="component-category">
+                        <h4><i class="fas fa-smile"></i> Mouth Expressions</h4>
+                        <div class="row g-4">
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/craving.png" class="component-img" alt="Craving mouth" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/eating_pizza.png" class="component-img" alt="Eating pizza mouth" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/smile.png" class="component-img" alt="Smile mouth" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/speechless.png" class="component-img" alt="Speechless mouth" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/stan.png" class="component-img" alt="Stan mouth" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hat -->
+                    <div class="component-category">
+                        <h4><i class="fas fa-hat-cowboy"></i> Hat Accessories</h4>
+                        <div class="row g-4">
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/hat1.png" class="component-img" alt="Hat style 1" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/hat2.png" class="component-img" alt="Hat style 2" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/hat3.png" class="component-img" alt="Hat style 3" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/hat4.png" class="component-img" alt="Hat style 4" loading="lazy">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4">
+                                <img src="img/hat5.png" class="component-img" alt="Hat style 5" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Key Features Section -->
+                <div class="row mt-5">
+                    <h3 class="section-title">Key Features</h3>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-cubes"></i>
+                            </div>
+                            <h4>Modular Design System</h4>
+                            <p>Interchangeable components including body parts, expressions, and accessories that can be mixed and matched.</p>
+                            <span class="feature-tag">Modular</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <h4>300+ Combinations</h4>
+                            <p>Automated script generates over 300 unique character designs from the component library.</p>
+                            <span class="feature-tag">Scalable</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <h4>6 Colour Variations</h4>
+                            <p>Each component available in blue, green, orange, pink, red, and yellow for diverse character palettes.</p>
+                            <span class="feature-tag">Colorful</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-6 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-smile-beam"></i>
+                            </div>
+                            <h4>Multiple Expressions</h4>
+                            <p>Various eye and mouth expressions including happy, bored, enjoying, sleeping, and more.</p>
+                            <span class="feature-tag">Expressive</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-6 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-hat-cowboy"></i>
+                            </div>
+                            <h4>Accessory System</h4>
+                            <p>Multiple hat styles and accessories to add personality to each character design.</p>
+                            <span class="feature-tag">Customizable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Note about combinations - Enhanced -->
+                <div class="row mt-4 mb-5">
+                    <div class="col-12">
+                        <div class="text-center p-5" style="background: linear-gradient(180deg, #f3f3f3 0%, #e0e0e0 100%); border-radius: 16px;">
+                            <div class="mb-3">
+                                <i class="fas fa-magic" style="font-size: 3rem; color: #FF8C42;"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3" style="color: #FF8C42; font-size: 1.5rem;">
+                                Over 300 Unique Character Designs
+                            </h4>
+                            <p class="text-muted" style="max-width: 700px; margin: 0 auto; font-size: 1.1rem;">
+                                Created in Adobe Illustrator with a modular component system, then combined using a custom 
+                                script to generate hundreds of unique chibi characters with different body parts, colors, 
+                                expressions, and accessories.
+                            </p>
+                            <div class="mt-4">
+                                <span class="tech-badge">Vector Art</span>
+                                <span class="tech-badge">Modular Design</span>
+                                <span class="tech-badge">Character Design</span>
+                                <span class="tech-badge">Typography</span>
+                                <span class="tech-badge">Automation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer placeholder -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    
+    <!-- Custom JS for loading partials -->
+    <script type="text/javascript">
+        $('#navbar-container').load('partials/header.html');
+        $('#footer-container').load('partials/footer.html');
+    </script>
+    
+    <script src="js/navbar.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/footer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio App Prototype | Studio</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/substyle.css">
+
+    <style>
+        /* Additional styling for Portfolio App Prototype page */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tech-badge {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-badge:hover {
+            background-color: #FF8C42;
+            color: white;
+        }
+        
+        .project-highlight {
+            background-color: #f9f9f9;
+            border-left: 4px solid #FF8C42;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .project-highlight p {
+            margin-bottom: 0;
+            font-style: italic;
+        }
+        
+        .prototype-preview {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .prototype-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .prototype-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .preview-caption {
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid #eee;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .preview-caption i {
+            color: #FF8C42;
+            margin-right: 8px;
+        }
+        
+        /* Video container for larger video */
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Key Features Cards */
+        .feature-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #f5f5f5;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 140, 66, 0.15);
+            border-color: #FF8C42;
+        }
+        
+        .feature-icon-large {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            background: linear-gradient(135deg, #FF8C42 0%, #FFAA6C 100%);
+            color: white;
+            font-size: 2rem;
+            border-radius: 20px;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 20px rgba(255, 140, 66, 0.3);
+        }
+        
+        .feature-card h4 {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .feature-tag {
+            display: inline-block;
+            background-color: #FFF0E6;
+            color: #FF8C42;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        /* Software/Tool Cards */
+        .tool-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.1);
+            border-color: #FF8C42;
+        }
+        
+        .tool-icon {
+            font-size: 2.5rem;
+            color: #FF8C42;
+            margin-bottom: 15px;
+        }
+        
+        .tool-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .tool-desc {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Animation feature showcase */
+        .animation-showcase {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .animation-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #FF8C42;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .animation-dot:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        
+        .animation-dot:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation placeholder -->
+    <div id="navbar-container"></div>
+
+    <main>
+        <div class="container">
+            <!-- Project Header -->
+            <div class="row start-page-spacer">
+                <div class="col-md-5 portfolio-description">
+                    <span class="sub-title">PROJECT</span>
+                    <h1>Portfolio App <br>Prototype</h1>
+                    
+                    <span class="sub-title">CATEGORY</span>
+                    <h5>Portfolio / UI/UX Design</h5>
+                    
+                    <span class="sub-title">SOFTWARE USED</span>
+                    <h5>Adobe XD</h5>
+                    
+                    <!-- Tech stack badges -->
+                    <div class="tech-stack">
+                        <span class="tech-badge">Adobe XD</span>
+                        <span class="tech-badge">Wireframing</span>
+                        <span class="tech-badge">Prototyping</span>
+                        <span class="tech-badge">Auto-Animate</span>
+                        <span class="tech-badge">UI Design</span>
+                        <span class="tech-badge">Custom Icons</span>
+                    </div>
+                </div>
+                
+                <div class="col-md-7">
+                    <p class="about-p">
+                        This module project uses Adobe XD to construct a portfolio prototype. Some of my Adobe projects are
+                        displayed in this portfolio.
+                        <br><br>
+                        I use Adobe XD for creating wireframes, custom icons, designs and animated effects for unique user
+                        interactions. I also use graphics and animations plugin to create interaction with the user. Create a unique intro by using the inbuild auto animation.
+                    </p>
+                    <br><br>
+                    <div class="text-end">
+                        <a href="https://xd.adobe.com/view/62b9d105-a9e6-40d3-874b-a1863e3953e1-37ea/" class="live-btn" target="_blank" rel="noopener noreferrer">
+                            Live Demo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Content -->
+            <div class="portfolio-img">
+                
+                <!-- Tools Used Section -->
+                <div class="row mb-5">
+                    <h3 class="section-title">Design Tools & Features</h3>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-pencil-ruler"></i>
+                            </div>
+                            <div class="tool-name">Adobe XD</div>
+                            <div class="tool-desc">
+                                Industry-standard tool for wireframing, prototyping, and creating interactive user experiences
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-draw-polygon"></i>
+                            </div>
+                            <div class="tool-name">Custom Icons</div>
+                            <div class="tool-desc">
+                                Hand-crafted vector icons designed specifically for this portfolio prototype
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-film"></i>
+                            </div>
+                            <div class="tool-name">Auto-Animate</div>
+                            <div class="tool-desc">
+                                Built-in animation features creating smooth transitions and micro-interactions
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Highlight Box
+                <div class="project-highlight">
+                    <p>
+                        <i class="fas fa-quote-left" style="color: #FF8C42; margin-right: 10px; opacity: 0.6;"></i>
+                        Using Adobe XD's auto-animate and plugin ecosystem to create engaging user interactions and a unique intro animation that brings the portfolio to life.
+                        <i class="fas fa-quote-right" style="color: #FF8C42; margin-left: 10px; opacity: 0.6;"></i>
+                    </p>
+                </div> -->
+                
+                <!-- Video Demo Section - Larger -->
+                <div class="row text-center">
+                    <h3 class="section-title">Video Demo</h3>
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="video-container">
+                            <div class="prototype-preview">
+                                <video class="w-50" autoplay muted loop playsinline>
+                                    <source src="img/prototype.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <div class="preview-caption">
+                                    <i class="fas fa-play-circle"></i> Interactive prototype walkthrough - Auto-animate and transitions
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+
+                <!-- Gallery Section - Larger Images (3 per row for first row, 4 for second) -->
+                <div class="row">
+                    <h3 class="section-title">Design Gallery</h3>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="prototype-preview">
+                            <img class="w-100" src="img/PD_prototype.PNG" alt="Prototype home screen" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-home"></i> Home Screen - Portfolio landing page
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="prototype-preview">
+                            <img class="w-100" src="img/PD_prototype1.PNG" alt="Prototype project grid" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-user"></i> About Section - Designer profile
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="prototype-preview">
+                            <img class="w-100" src="img/PD_prototype2.PNG" alt="Prototype project detail" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-th"></i> Project Grid - Showcase layout
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="prototype-preview">
+                            <img class="w-100" src="img/PD_prototype3.PNG" alt="Prototype about page" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-file-alt"></i> Project Detail - Showcase view
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="prototype-preview">
+                            <img class="w-100" src="img/PD_prototype4.PNG" alt="Prototype contact page" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-file-alt"></i> Project Detail - Showcase view
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="prototype-preview">
+                            <img class="w-100" src="img/PD_prototype5.PNG" alt="Prototype navigation" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-file-alt"></i> Project Detail - Showcase view
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="prototype-preview">
+                            <img class="w-100" src="img/PD_prototype6.PNG" alt="Prototype animations" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-envelope"></i> Contact Form - Get in touch
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Animation Features Showcase
+                <div class="row mt-4">
+                    <div class="col-12 text-center mb-4">
+                        <div class="animation-showcase">
+                            <span class="animation-dot"></span>
+                            <span class="animation-dot"></span>
+                            <span class="animation-dot"></span>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <!-- Key Features Section -->
+                <div class="row mt-3">
+                    <h3 class="section-title">Key Features</h3>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <h4>Custom Wireframes</h4>
+                            <p>Hand-crafted wireframes created from scratch in Adobe XD, establishing clear visual hierarchy and user flow.</p>
+                            <span class="feature-tag">Wireframing</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-icons"></i>
+                            </div>
+                            <h4>Custom Icon Set</h4>
+                            <p>Unique vector icons designed specifically for this portfolio, maintaining visual consistency throughout.</p>
+                            <span class="feature-tag">Icon Design</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h4>Auto-Animate Effects</h4>
+                            <p>Smooth transitions and micro-interactions using Adobe XD's built-in auto-animate feature for engaging UX.</p>
+                            <span class="feature-tag">Animation</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-6 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <h4>Graphics & Animation Plugins</h4>
+                            <p>Leveraged plugin ecosystem to enhance interactions and create more dynamic user experiences.</p>
+                            <span class="feature-tag">Plugins</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-6 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h4>Unique Intro Animation</h4>
+                            <p>Custom-designed intro sequence using auto-animate to create a memorable first impression.</p>
+                            <span class="feature-tag">Motion Design</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Design Process Summary -->
+                <div class="row mt-4 mb-5">
+                    <div class="col-12">
+                        <div class="text-center p-5" style="background: linear-gradient(180deg, #f3f3f3 0%, #e0e0e0 100%); border-radius: 16px;">
+                            <div class="mb-3">
+                                <i class="fas fa-pen-fancy" style="font-size: 3rem; color: #FF8C42;"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3" style="color: #FF8C42; font-size: 1.5rem;">
+                                Complete UI/UX Design Workflow
+                            </h4>
+                            <p class="text-muted" style="max-width: 700px; margin: 0 auto; font-size: 1.1rem;">
+                                From initial wireframes to interactive prototype with custom icons and smooth animations - 
+                                all crafted in Adobe XD to create a professional portfolio experience.
+                            </p>
+                            <div class="mt-4">
+                                <span class="tech-badge">Wireframes →</span>
+                                <span class="tech-badge">Mockups →</span>
+                                <span class="tech-badge">Prototype →</span>
+                                <span class="tech-badge">Animations</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer placeholder -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    
+    <!-- Custom JS for loading partials -->
+    <script type="text/javascript">
+        $('#navbar-container').load('partials/header.html');
+        $('#footer-container').load('partials/footer.html');
+    </script>
+    
+    <script src="js/navbar.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/footer.js"></script>
+</body>
+
+</html>

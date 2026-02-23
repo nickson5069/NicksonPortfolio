@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Reviews | Studio</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/substyle.css">
+
+    <style>
+        /* Additional styling for Hotel Reviews page */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tech-badge {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-badge:hover {
+            background-color: #FF8C42;
+            color: white;
+        }
+        
+        .project-highlight {
+            background-color: #f9f9f9;
+            border-left: 4px solid #FF8C42;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .project-highlight p {
+            margin-bottom: 0;
+            font-style: italic;
+        }
+        
+        .website-preview {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .website-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .website-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .preview-caption {
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid #eee;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .preview-caption i {
+            color: #FF8C42;
+            margin-right: 8px;
+        }
+        
+        /* Video container for larger video */
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* Key Features Cards */
+        .feature-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #f5f5f5;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 140, 66, 0.15);
+            border-color: #FF8C42;
+        }
+        
+        .feature-icon-large {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            background: linear-gradient(135deg, #FF8C42 0%, #FFAA6C 100%);
+            color: white;
+            font-size: 2rem;
+            border-radius: 20px;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 20px rgba(255, 140, 66, 0.3);
+        }
+        
+        .feature-card h4 {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .feature-tag {
+            display: inline-block;
+            background-color: #FFF0E6;
+            color: #FF8C42;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        /* Technology Cards */
+        .tech-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.1);
+            border-color: #FF8C42;
+        }
+        
+        .tech-icon {
+            font-size: 2.5rem;
+            color: #FF8C42;
+            margin-bottom: 15px;
+        }
+        
+        .tech-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .tech-desc {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Database schema styling */
+        .db-schema {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px dashed #FF8C42;
+        }
+        
+        .db-table {
+            font-family: monospace;
+            background-color: white;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 3px solid #FF8C42;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation placeholder -->
+    <div id="navbar-container"></div>
+
+    <main>
+        <div class="container">
+            <!-- Project Header -->
+            <div class="row start-page-spacer">
+                <div class="col-md-5 portfolio-description">
+                    <span class="sub-title">PROJECT</span>
+                    <h1>Hotel Reviews</h1>
+                    
+                    <span class="sub-title">CATEGORY</span>
+                    <h5>WEBSITE PORTAL</h5>
+                    
+                    <span class="sub-title">LANGUAGE</span>
+                    <h5>HTML, CSS, PHP, MySQL</h5>
+                    
+                    <span class="sub-title">SOFTWARE USED</span>
+                    <h5>NetBean</h5>
+                    
+                    <!-- Tech stack badges -->
+                    <div class="tech-stack">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">PHP</span>
+                        <span class="tech-badge">MySQL</span>
+                        <span class="tech-badge">Database</span>
+                    </div>
+                </div>
+                
+                <div class="col-md-7">
+                    <p class="about-p">
+                        A website called Hotel Reviews allows users to log in and enter reviews for individual hotels.
+                        They'll support an increase in foot traffic and reservations, as well as provide visitors more
+                        assurance in their choice to stay at the facility.
+                        <br><br>
+                        This website was created using HTML for the website's structure, CSS for decoration, PHP to check
+                        for validation, and MySQL to connect the websites to databases. The user can browse the hotels and
+                        read all of the reviews, but in order to post their own reviews, they must first register and log
+                        in.
+                    </p>
+                    
+                    <!-- Live Demo Button
+                    <div class="mt-4">
+                        <a href="#" class="live-btn" target="_blank" rel="noopener noreferrer">
+                            Live Demo <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#" class="live-btn" style="margin-left: 15px; background-color: transparent; color: #FF8C42; border: 2px solid #FF8C42;" target="_blank" rel="noopener noreferrer">
+                            GitHub Repo <i class="fab fa-github"></i>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- Portfolio Content -->
+            <div class="portfolio-img">
+                
+                <!-- Technologies Used Section -->
+                <div class="row mb-5">
+                    <h3 class="section-title">Technologies Used</h3>
+                    
+                    <div class="col-md-3 mb-4">
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <div class="tech-name">HTML5</div>
+                            <div class="tech-desc">
+                                Semantic structure for forms, hotel listings, and review displays
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 mb-4">
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fab fa-css3-alt"></i>
+                            </div>
+                            <div class="tech-name">CSS3</div>
+                            <div class="tech-desc">
+                Styling and responsive design for all pages and components
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 mb-4">
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fab fa-php"></i>
+                            </div>
+                            <div class="tech-name">PHP</div>
+                            <div class="tech-desc">
+                                Server-side validation, user authentication, and dynamic content
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 mb-4">
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="tech-name">MySQL</div>
+                            <div class="tech-desc">
+                                Database management for users, hotels, and reviews
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Highlight Box
+                <div class="project-highlight">
+                    <p>
+                        <i class="fas fa-quote-left" style="color: #FF8C42; margin-right: 10px; opacity: 0.6;"></i>
+                        The user can browse the hotels and read all of the reviews, but in order to post their own reviews, 
+                        they must first register and log in. This creates a trusted community of verified reviewers.
+                        <i class="fas fa-quote-right" style="color: #FF8C42; margin-left: 10px; opacity: 0.6;"></i>
+                    </p>
+                </div> -->
+                
+                <!-- Video Demo Section - Larger -->
+                <div class="row text-center">
+                    <h3 class="section-title">Video Demo</h3>
+                    <div class="col-12">
+                        <div class="video-container">
+                            <div class="website-preview">
+                                <video class="w-100" autoplay muted loop playsinline>
+                                    <source src="img/hotels.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <div class="preview-caption">
+                                    <i class="fas fa-play-circle"></i> Complete walkthrough - User registration, login, and review submission
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Section - Larger Images (2 per row) -->
+                <div class="row">
+                    <h3 class="section-title">Website Screenshots</h3>
+                    
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10">
+                        <div class="website-preview">
+                            <img class="w-100" src="img/login.png" alt="Hotel Reviews login page" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-sign-in-alt"></i> Login & Registration Page - User authentication portal
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1"></div>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="website-preview">
+                            <img class="w-100" src="img/hotels.png" alt="Hotel listings page" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-hotel"></i> Hotel Listings - Browse all available hotels
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="website-preview">
+                            <img class="w-100" src="img/hotelDetail.png" alt="Hotel detail page" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-info-circle"></i> Hotel Details - Comprehensive hotel information
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="website-preview">
+                            <img class="w-100" src="img/reviews.png" alt="Reviews page" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-star"></i> Reviews Section - User feedback and ratings
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="website-preview">
+                            <img class="w-100" src="img/addReview.png" alt="Add review page" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-pen-alt"></i> Add Review Form - Submit your hotel experience (registered users only)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Database Schema Section -->
+                <div class="row mt-4">
+                    <h3 class="section-title">Database Structure</h3>
+                    <div class="col-12">
+                        <div class="db-schema">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="db-table">
+                                        <strong><i class="fas fa-table" style="color: #FF8C42;"></i> users</strong><br>
+                                        - user_id (PK)<br>
+                                        - username<br>
+                                        - email<br>
+                                        - password_hash<br>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="db-table">
+                                        <strong><i class="fas fa-table" style="color: #FF8C42;"></i> hotels</strong><br>
+                                        - hotel_id (PK)<br>
+                                        - name<br>
+                                        - address<br>
+                                        - contact<br>
+                                        - description<br>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="db-table">
+                                        <strong><i class="fas fa-table" style="color: #FF8C42;"></i> reviews</strong><br>
+                                        - review_id (PK)<br>
+                                        - user_id (FK)<br>
+                                        - hotel_id (FK)<br>
+                                        - rating<br>
+                                        - comment<br>
+                                        - date_posted
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Key Features Section -->
+                <div class="row mt-5">
+                    <h3 class="section-title">Key Features</h3>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-user-lock"></i>
+                            </div>
+                            <h4>User Authentication</h4>
+                            <p>Secure registration and login system. Only authenticated users can post reviews, ensuring credibility and preventing spam.</p>
+                            <span class="feature-tag">PHP Sessions</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4>MySQL Database</h4>
+                            <p>Relational database structure with proper foreign key relationships between users, hotels, and reviews.</p>
+                            <span class="feature-tag">SQL</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <h4>Rating System</h4>
+                            <p>Users can rate hotels on a numerical scale, helping others make informed decisions about their stay.</p>
+                            <span class="feature-tag">Reviews</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-6 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h4>Hotel Discovery</h4>
+                            <p>Browse through hotel listings with detailed information, amenities, and location data to find the perfect stay.</p>
+                            <span class="feature-tag">Listing</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-6 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4>Form Validation</h4>
+                            <p>Server-side PHP validation ensures data integrity and security for all user inputs and form submissions.</p>
+                            <span class="feature-tag">Security</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Technical Summary -->
+                <div class="row mt-4 mb-5">
+                    <div class="col-12">
+                        <div class="text-center p-5" style="background: linear-gradient(180deg, #f3f3f3 0%, #e0e0e0 100%); border-radius: 16px;">
+                            <div class="mb-3">
+                                <i class="fas fa-code" style="font-size: 3rem; color: #FF8C42;"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3" style="color: #FF8C42; font-size: 1.5rem;">
+                                Full-Stack Web Application
+                            </h4>
+                            <p class="text-muted" style="max-width: 700px; margin: 0 auto; font-size: 1.1rem;">
+                                Built with PHP and MySQL for dynamic content management, featuring secure user authentication, 
+                                CRUD operations for reviews, and a responsive front-end interface.
+                            </p>
+                            <div class="mt-4">
+                                <span class="tech-badge">CRUD Operations</span>
+                                <span class="tech-badge">User Sessions</span>
+                                <span class="tech-badge">Form Validation</span>
+                                <span class="tech-badge">Database Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer placeholder -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    
+    <!-- Custom JS for loading partials -->
+    <script type="text/javascript">
+        $('#navbar-container').load('partials/header.html');
+        $('#footer-container').load('partials/footer.html');
+    </script>
+    
+    <script src="js/navbar.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/footer.js"></script>
+</body>
+
+</html>

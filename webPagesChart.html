@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Data Charts | Studio</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/substyle.css">
+
+    <style>
+        /* Additional styling for Web Pages Chart page */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tech-badge {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-badge:hover {
+            background-color: #FF8C42;
+            color: white;
+        }
+        
+        .project-highlight {
+            background-color: #f9f9f9;
+            border-left: 4px solid #FF8C42;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .project-highlight p {
+            margin-bottom: 0;
+            font-style: italic;
+        }
+        
+        .chart-preview {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .chart-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .chart-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .preview-caption {
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid #eee;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .preview-caption i {
+            color: #FF8C42;
+            margin-right: 8px;
+        }
+        
+        .library-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .library-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 140, 66, 0.1);
+            border-color: #FF8C42;
+        }
+        
+        .library-icon {
+            font-size: 2.5rem;
+            color: #FF8C42;
+            margin-bottom: 15px;
+        }
+        
+        .library-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .library-desc {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .chart-type-badge {
+            display: inline-block;
+            background-color: #FFF0E6;
+            color: #FF8C42;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin: 5px;
+            border: 1px solid #FFE0D4;
+        }
+        
+        /* New styles for larger images */
+        .gallery-row {
+            margin-bottom: 30px;
+        }
+        
+        .col-lg-6 .chart-preview {
+            margin-bottom: 0;
+        }
+        
+        /* Key Features Cards - New style without ticks */
+        .feature-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #f5f5f5;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 140, 66, 0.15);
+            border-color: #FF8C42;
+        }
+        
+        .feature-icon-large {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            background: linear-gradient(135deg, #FF8C42 0%, #FFAA6C 100%);
+            color: white;
+            font-size: 2rem;
+            border-radius: 20px;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 20px rgba(255, 140, 66, 0.3);
+        }
+        
+        .feature-card h4 {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .feature-tag {
+            display: inline-block;
+            background-color: #FFF0E6;
+            color: #FF8C42;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        /* Larger video section */
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation placeholder -->
+    <div id="navbar-container"></div>
+
+    <main>
+        <div class="container">
+            <!-- Project Header -->
+            <div class="row start-page-spacer">
+                <div class="col-md-5 portfolio-description">
+                    <span class="sub-title">PROJECT</span>
+                    <h1>Web Data Charts</h1>
+                    
+                    <span class="sub-title">CATEGORY</span>
+                    <h5>Web Development</h5>
+                    
+                    <span class="sub-title">LANGUAGE</span>
+                    <h5>HTML, CSS, Bootstrap, jQuery, FullPage.js, Chart.js</h5>
+                    
+                    <!-- Tech stack badges -->
+                    <div class="tech-stack">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">Bootstrap</span>
+                        <span class="tech-badge">jQuery</span>
+                        <span class="tech-badge">FullPage.js</span>
+                        <span class="tech-badge">Chart.js</span>
+                        <span class="tech-badge">Flexbox</span>
+                        <span class="tech-badge">Responsive</span>
+                    </div>
+                </div>
+                
+                <div class="col-md-7">
+                    <div>
+                        <span class="chart-type-badge"><i class="fas fa-chart-bar me-2"></i>Bar Charts</span>
+                        <span class="chart-type-badge"><i class="fas fa-chart-line me-2"></i>Line Charts</span>
+                        <span class="chart-type-badge"><i class="fas fa-chart-pie me-2"></i>Pie Charts</span>
+                        <span class="chart-type-badge"><i class="fas fa-chart-scatter me-2"></i>Scatter Plots</span>
+                    </div>
+                    <p class="about-p">
+                        This project aims to develop several types of charts using full-page JavaScript. To display static
+                        data, it is necessary to develop a variety of charts. The website is fully responsive and uses
+                        Flexbox and CSS media queries to achieve this.
+                        <br><br>
+                        HTML, CSS, FullPage JS, and Chart JS are used to develop the framework. Each type of graphic will show the appropriate data.
+                    </p>
+                    
+                    <!-- Live Demo Button
+                    <div class="mt-4">
+                        <a href="#" class="live-btn" target="_blank" rel="noopener noreferrer">
+                            Live Demo <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#" class="live-btn" style="margin-left: 15px; background-color: transparent; color: #FF8C42; border: 2px solid #FF8C42;" target="_blank" rel="noopener noreferrer">
+                            GitHub Repo <i class="fab fa-github"></i>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- Portfolio Content -->
+            <div class="portfolio-img">
+                
+                <!-- Project Highlight Box
+                <div class="project-highlight">
+                    <p>
+                        <i class="fas fa-chart-pie" style="color: #FF8C42; margin-right: 10px;"></i>
+                        Interactive data visualization with full-page scrolling experience. Each chart type presents different data sets in an engaging, full-screen format.
+                    </p>
+                </div> -->
+                
+                <!-- Libraries Used Section -->
+                <div class="row mb-5">
+                    <h3 class="section-title">Key Libraries Used</h3>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="library-card">
+                            <div class="library-icon">
+                                <i class="fas fa-file-code"></i>
+                            </div>
+                            <div class="library-name">FullPage.js</div>
+                            <div class="library-desc">
+                                Creates smooth, full-screen scrolling sections with navigation dots and keyboard support
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="library-card">
+                            <div class="library-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="library-name">Chart.js</div>
+                            <div class="library-desc">
+                                Renders beautiful, animated charts with multiple types: bar, line, pie, and radar
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="library-card">
+                            <div class="library-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="library-name">Bootstrap + Flexbox</div>
+                            <div class="library-desc">
+                                Ensures responsive design that works perfectly on all screen sizes
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chart Types Section
+                <div class="row mb-4 text-center">
+                    <div class="col-12">
+                        <h3 class="section-title">Chart Types Included</h3>
+                        <div>
+                            <span class="chart-type-badge"><i class="fas fa-chart-bar me-2"></i>Bar Charts</span>
+                            <span class="chart-type-badge"><i class="fas fa-chart-line me-2"></i>Line Charts</span>
+                            <span class="chart-type-badge"><i class="fas fa-chart-pie me-2"></i>Pie Charts</span>
+                            <span class="chart-type-badge"><i class="fas fa-chart-scatter me-2"></i>Scatter Plots</span>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <!-- Video Demo Section - Larger -->
+                <div class="row text-center">
+                    <h3 class="section-title">Video Demo</h3>
+                    <div class="col-12">
+                        <div class="video-container">
+                            <div class="chart-preview">
+                                <video class="w-100" autoplay muted loop playsinline>
+                                    <source src="img/chart.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <div class="preview-caption">
+                                    <i class="fas fa-play-circle"></i> Full-page scrolling with interactive charts demonstration
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Section - Larger Images (2 per row) -->
+                <div class="row">
+                    <h3 class="section-title">Chart Previews</h3>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="chart-preview">
+                            <img class="w-100" src="img/chart1.png" alt="Bar and line charts" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-chart-bar"></i> Bar & Line Charts - Sales Data Visualization
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="chart-preview">
+                            <img class="w-100" src="img/chart2.png" alt="Pie and radar charts" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-chart-pie"></i> Pie & Radar Charts - Demographics Analysis
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-12">
+                        <div class="chart-preview">
+                            <img class="w-100" src="img/chart3.png" alt="Multi-chart dashboard" loading="lazy">
+                            <div class="preview-caption">
+                                <i class="fas fa-chart-scatter"></i> Multi-chart Dashboard - Comprehensive Analytics
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Key Features Section - Redesigned without ticks -->
+                <div class="row mt-5">
+                    <h3 class="section-title">Key Features</h3>
+                    
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-scroll"></i>
+                            </div>
+                            <h4>Full-Page Navigation</h4>
+                            <p>Smooth scrolling between chart sections with automatic navigation dots and keyboard controls for seamless browsing.</p>
+                            <span class="feature-tag">FullPage.js</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Animated Charts</h4>
+                            <p>Chart.js animations bring data to life with smooth transitions, hover effects, and interactive tooltips.</p>
+                            <span class="feature-tag">Chart.js</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4>Responsive Design</h4>
+                            <p>Charts and layout automatically adjust for optimal viewing on desktop, tablet, and mobile devices.</p>
+                            <span class="feature-tag">Flexbox</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="feature-card">
+                            <div class="feature-icon-large">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4>Static Data Display</h4>
+                            <p>Clean presentation of sample datasets showing different chart types with realistic data visualization.</p>
+                            <span class="feature-tag">Sample Data</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Technical Note -->
+                <div class="row mt-3 mb-5">
+                    <div class="col-12">
+                        <div class="text-center p-4" style="background: linear-gradient(180deg, #f3f3f3 0%, #e0e0e0 100%); border-radius: 16px;">
+                            <h4 class="fw-bold mb-3" style="color: #FF8C42;">
+                                <i class="fas fa-code me-2"></i>
+                                Built with FullPage.js & Chart.js
+                            </h4>
+                            <p class="text-muted" style="max-width: 700px; margin: 0 auto;">
+                                Combining full-screen scrolling with interactive data visualization creates an engaging way to present statistical information.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer placeholder -->
+    <div id="footer-container"></div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    
+    <!-- Custom JS for loading partials -->
+    <script type="text/javascript">
+        $('#navbar-container').load('partials/header.html');
+        $('#footer-container').load('partials/footer.html');
+    </script>
+    <script src="js/navbar.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/footer.js"></script>
+</body>
+
+</html>
